@@ -10,7 +10,7 @@ function loop(el, atrs){
         console.log('atrName:', atrName);
         console.log('value:',value);
         
-        if(atrName === 'type'){
+        if(atrName === 'typeName'){
             continue
         }
         else if(atrName === 'Events'){
@@ -64,7 +64,7 @@ export function insertTo(parent, content, flag='end'){
     for (let obj of content) {
 
         console.log('obj:', obj)
-        const typeOf = obj.type
+        const typeOf = obj.typeName
         
         let el = document.createElement(`${typeOf}`);
         console.log('el:', el)
@@ -113,6 +113,9 @@ export function removeFrom(parentQry, kidQry){
     document.querySelector(parentQry).removeChild(document.querySelector(kidQry))
 }
 
+export function make(nodename){
+    return document.createElement(nodename)
+}
 
 // doc:
 
