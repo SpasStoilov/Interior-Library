@@ -1,23 +1,6 @@
 import * as Interior from "./interior.js"
-
-// def events here:
-
-function OnMouseover (e) {
-    if (e.target.tagName === "A"){
-        e.target.style.backgroundColor = 'gray';
-        e.target.style.color = 'white'
-    }
-   
-}
-function OnMouseout (e) {
-    if (e.target.tagName === "A"){
-        e.target.style.backgroundColor = '';
-        e.target.style.color = 'black'
-    }
-   
-}
-//------------------------------------------------------------
-
+import * as Event from "./events.js"
+import * as glbStyles from "./globalStyles.js"
 
 // global styles:
 
@@ -30,10 +13,9 @@ const AnchorNavBarStyles = {
 
 //-------------------------------------------------------------
 
-
 // temps:
 
-let navOptAndLogo = [
+export let navOptAndLogo = [
     {
         typeName: "img",
         className:"logo-img",
@@ -62,26 +44,26 @@ let navOptAndLogo = [
         typeName: "a",
         className:"about",
         textContent: "About",
-        style: AnchorNavBarStyles,
+        style: glbStyles.AnchorNavBarStyles,
         href: "#about"
     },
     {
         typeName: "a",
         className:"register",
         textContent: "Register",
-        style: AnchorNavBarStyles,
+        style: glbStyles.AnchorNavBarStyles,
         href: "#register"
     },
     {
         typeName: "a",
         className:"logIn",
         textContent: "LogIn",
-        style: AnchorNavBarStyles,
+        style: glbStyles.AnchorNavBarStyles,
         href: "#login"
     }
 ]
 
-let navbar = [
+export let navbar = [
     {
         typeName: 'div',
         className: "navbar",
@@ -91,8 +73,8 @@ let navbar = [
             boxShadow: "0px 2px 5px gray"
         },
         Events: [
-            {evnt: "mouseover", evntFunc: Interior.referTo(OnMouseover)},
-            {evnt: "mouseout", evntFunc: Interior.referTo(OnMouseout)}
+            {evnt: "mouseover", evntFunc: Interior.referTo(Event.OnMouseover)},
+            {evnt: "mouseout", evntFunc: Interior.referTo(Event.OnMouseout)}
         ],
         textContent: [
             ...navOptAndLogo,
@@ -101,7 +83,7 @@ let navbar = [
 
 ];
 
-let paragraph = [
+export let paragraph = [
     {
         typeName: "p",
         innerHTML: `Interior <span style="font-weight: bold;">DEMO</span>`
@@ -109,7 +91,7 @@ let paragraph = [
 ]
 
 
-let logInInputAndButton = [
+export let logInInputAndButton = [
     {
         typeName: "input",
         type: "text",
@@ -138,7 +120,7 @@ let logInInputAndButton = [
     },
 ]
 
-let form = [
+export let form = [
     {
         typeName: "form",
         className: "login-Form",
@@ -158,23 +140,3 @@ let form = [
     }
 ]
 //--------------------------------------------------------------
-
-
-//print:
-
-Interior.select('body').style.margin = "0px"
-
-Interior.insertTo('body', navbar);
-
-navbar[0].className = 'second-nav';
-navbar[0].style.backgroundColor = 'yellow'
-Interior.insertTo('body', navbar);
-
-paragraph[0].style = {
-    fontSize: "x-large"
-}
-Interior.insertTo('body', paragraph, 'start')
-
-Interior.insertTo('body', form)
-
-//---------------------------------------------------------------
