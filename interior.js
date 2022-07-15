@@ -1,6 +1,6 @@
 const namePattern = /^\w+(?=-)/;
 
-function loop(el, atrs){
+function loop(el, atrs, ignoreAtr){
 
     console.log('atrs ', atrs);
  
@@ -10,7 +10,7 @@ function loop(el, atrs){
         console.log('atrName:', atrName);
         console.log('value:',value);
         
-        if(atrName === 'typeName'){
+        if(atrName === 'typeName' || ignoreAtr.includes(atrName)){
             continue
         }
         else if(atrName === 'Events'){
@@ -49,7 +49,7 @@ export function select(qrySelector){
     return document.querySelector(qrySelector);
 };
 
-export function insertTo(parent, content, flag='end'){
+export function insertTo(parent, content, flag='end', ignoreAtr=[]){
 
     console.log('parent: ', parent);
     console.log('content:', content);
@@ -65,14 +65,18 @@ export function insertTo(parent, content, flag='end'){
 
         console.log('obj:', obj)
         const typeOf = obj.typeName
+        let el;
+
+        if (typeof obj === 'string'){
+            el = document.createDocumentFragment()
+            el.textContent += obj
+        } else{
+            el = document.createElement(`${typeOf}`);
+            if (Object.keys(obj).length !== 0) {
+                loop(el, obj, ignoreAtr);
+            }; 
+        }
         
-        let el = document.createElement(`${typeOf}`);
-        console.log('el:', el)
-
-        if (Object.keys(obj).length !== 0) {
-            loop(el, obj);
-        }; 
-
         //filling parent:
         if (flag == "end"){
             parent.appendChild(el);

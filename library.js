@@ -2,18 +2,6 @@ import * as Interior from "./interior.js"
 import * as Event from "./events.js"
 import * as glbStyles from "./globalStyles.js"
 
-// global styles:
-
-const AnchorNavBarStyles = {
-    padding: '20px',
-    marginRight: '70px',
-    fontFamily: "Arial, Helvetica, sans-serif",
-    textDecoration: "none"
-}
-
-//-------------------------------------------------------------
-
-// temps:
 
 export let navOptAndLogo = [
     {
@@ -86,7 +74,16 @@ export let navbar = [
 export let paragraph = [
     {
         typeName: "p",
-        innerHTML: `Interior <span style="font-weight: bold;">DEMO</span>`
+        textContent: [
+            'Interior',
+            {
+                type: 'span',
+                textContent: " DEMO",
+                style: {
+                    fontWeight: "bold"
+                }
+            }
+        ]
     }
 ]
 
@@ -139,4 +136,3 @@ export let form = [
         ]
     }
 ]
-//--------------------------------------------------------------
