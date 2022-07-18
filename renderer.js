@@ -1,5 +1,6 @@
 import * as Interior from "./interior.js"
 import * as Library from "./library.js"
+import * as Events from "./events.js"
 
 // temps:
 
@@ -24,11 +25,12 @@ navbar[0].className = 'second-nav';
 navbar[0].style.backgroundColor = 'yellow'
 Interior.insertTo('body', navbar);
 
+Interior.removeEvent('.second-nav', "mouseover", Events.OnMouseover)
+
 Interior.insertTo('body', paragraph, 'start')
 
 Interior.insertTo('body', form)
-
-let copyForm = Interior.copy(form)
 let ignoreAtr = ['style']
-Interior.insertTo('body', copyForm, 'end', ignoreAtr)
+Interior.insertTo('body', form, 'end', ignoreAtr)
+
 //---------------------------------------------------------------

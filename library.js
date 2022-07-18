@@ -61,8 +61,10 @@ export let navbar = [
             boxShadow: "0px 2px 5px gray"
         },
         Events: [
-            {evnt: "mouseover", evntFunc: Interior.referTo(Event.OnMouseover)},
-            {evnt: "mouseout", evntFunc: Interior.referTo(Event.OnMouseout)}
+            {evnt: "mouseover", evntFunc: Event.OnMouseover},
+            {evnt: "mouseout", evntFunc: Event.OnMouseout}
+            // {evnt: "mouseover", evntFunc: Interior.referTo(Event.OnMouseover)},
+            // {evnt: "mouseout", evntFunc: Interior.referTo(Event.OnMouseout)}
         ],
         textContent: [
             ...navOptAndLogo,
@@ -84,6 +86,7 @@ export let paragraph = [
                 }
             }
         ]
+        
     }
 ]
 
