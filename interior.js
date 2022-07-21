@@ -121,23 +121,41 @@ export function make(nodename){
 }
 
 export function removeEvent(qry, evnt, handler){
-    document.querySelector(qry).removeEventListener(evnt, handler)
+    let data = [
+        {
+            query: qry,
+            Events: [
+                {evnt: evnt, evntFunc: handler, act: "remove"}
+            ]
+        }
+    ]
+    update(data)
 }
 
 export function update(data){
 
     for (let obj of data) {
 
-        let objToChange = select(obj.query)
-        delete obj.query
-        obj.passedObj = objToChange
-        
-        if (obj.textContent) {
-            refresh(objToChange, [{textContent: obj.textContent}])
-            delete obj.textContent
-        }
+        try {
+            if (!obj.query){
+                throw new Error(`${obj} don't have "query" parameter in it!`)
+            }
+    
+            let objToChange = select(obj.query)
+            delete obj.query
+            obj.passedObj = objToChange
+            
+            if (obj.textContent) {
+                refresh(objToChange, [{textContent: obj.textContent}])
+                delete obj.textContent
+            }
+    
+            insertTo(false, [obj])
 
-        insertTo(false, [obj])
+        } catch (err) {
+            console.log(err.message)
+        }
+        
     }
 }
 

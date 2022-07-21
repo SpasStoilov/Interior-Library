@@ -159,5 +159,11 @@ export let dataToChange = [
                 }
             }
         ]
+    },
+    {
+        query: ".second-nav",
+        style: {
+            backgroundColor: "orange"
+        }
     }
 ]
