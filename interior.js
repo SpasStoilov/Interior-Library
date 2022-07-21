@@ -43,9 +43,6 @@ export function select(qrySelector){
 
 export function insertTo(parent, content, flag='end', ignoreAtr=[]){
 
-    // console.log('parent: ', parent);
-    // console.log('content:', content);
-    
     //check for qry:
     if (typeof parent == "string"){
         parent = document.querySelector(`${parent}`);
@@ -82,7 +79,6 @@ export function insertTo(parent, content, flag='end', ignoreAtr=[]){
         
         //filling parent:
         if (parent) {
-            console.log('YYYYYY: ', parent)
             if (flag == "end"){
                 parent.appendChild(el);
             }
@@ -100,6 +96,8 @@ export function insertTo(parent, content, flag='end', ignoreAtr=[]){
 }
 
 export function refresh(parent, content){
+
+    // The function removes all children and append new ones.
 
     //check for qry:
     if (typeof parent == "string"){
@@ -120,25 +118,34 @@ export function make(nodename){
     return document.createElement(nodename)
 }
 
-export function removeEvent(qry, evnt, handler){
+export function removeEvents(qry, ...evnts){
+
+    const Eventlist = evnts.map((ev) => {
+        let obj = {}
+        obj.evnt = ev[0];
+        obj.evntFunc = ev[1];
+        obj.act = 'remove';
+        return obj
+    })
+
     let data = [
         {
             query: qry,
-            Events: [
-                {evnt: evnt, evntFunc: handler, act: "remove"}
-            ]
+            Events: Eventlist
         }
     ]
-    update(data)
+    change(data)
 }
 
-export function update(data){
+export function change(data){
+
+    // The function updates elements.
 
     for (let obj of data) {
 
         try {
             if (!obj.query){
-                throw new Error(`${obj} don't have "query" parameter in it!`)
+                throw new Error(`ERROR: ${JSON.stringify(obj)} don't have "query" proparty in it!`)
             }
     
             let objToChange = select(obj.query)
@@ -161,7 +168,7 @@ export function update(data){
 
 
 
-//JUNk:
+//Trash:
 
 // export function copy(data) {
 //     return JSON.parse(JSON.stringify(data))
@@ -171,8 +178,5 @@ export function update(data){
 //     return `(() => ${ref})()`
 // }
 
-// doc:
-
-// Events:[
-//     {evnt:'click', evntFunc: Interior.referTo(OnClick)}
-// ]
+// {evnt: "mouseover", evntFunc: Interior.referTo(Event.OnMouseover)},
+// {evnt: "mouseout", evntFunc: Interior.referTo(Event.OnMouseout)}

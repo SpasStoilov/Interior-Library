@@ -1,4 +1,4 @@
-// global styles:
+// Global styles:
 
 export const AnchorNavBarStyles = {
     padding: '20px',

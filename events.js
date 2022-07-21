@@ -1,4 +1,4 @@
-// def events here:
+// EVENTS:
 
 export function OnMouseover (e) {
     if (e.target.tagName === "A"){

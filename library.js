@@ -1,7 +1,5 @@
-import * as Interior from "./interior.js"
 import * as Event from "./events.js"
 import * as glbStyles from "./globalStyles.js"
-
 
 
 export let navOptAndLogo = [
@@ -64,8 +62,6 @@ export let navbar = [
         Events: [
             {evnt: "mouseover", evntFunc: Event.OnMouseover},
             {evnt: "mouseout", evntFunc: Event.OnMouseout}
-            // {evnt: "mouseover", evntFunc: Interior.referTo(Event.OnMouseover)},
-            // {evnt: "mouseout", evntFunc: Interior.referTo(Event.OnMouseout)}
         ],
         textContent: [
             ...navOptAndLogo,
@@ -142,7 +138,7 @@ export let form = [
     }
 ]
 
-export let dataToChange = [
+export let DATA = [
     {
         query: ".changeMe",
         style: {

@@ -25,14 +25,17 @@ navbar[0].className = 'second-nav';
 navbar[0].style.backgroundColor = 'yellow'
 Interior.insertTo('body', navbar);
 
-Interior.removeEvent('.second-nav', "mouseover", Events.OnMouseover)
+Interior.removeEvents('.second-nav', ["mouseover", Events.OnMouseover], ["mouseout", Events.OnMouseout])
 
 Interior.insertTo('body', paragraph, 'start')
 
 Interior.insertTo('body', form)
+
 let ignoreAtr = ['style']
 Interior.insertTo('body', form, 'end', ignoreAtr)
 
-Interior.update(Library.dataToChange)
+Interior.change(Library.DATA)
+
+// Interior.refresh('body', [])
 
 //---------------------------------------------------------------
