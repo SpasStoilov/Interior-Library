@@ -6,16 +6,12 @@ function loop(el, atrs, ignoreAtr){
  
     for (let [atrName, value] of Object.entries(atrs)){
 
-        // console.log('atrName:', atrName);
-        // console.log('value:',value);
-        
         if(atrName === 'typeName' || ignoreAtr.includes(atrName)){
             continue
         }
         else if(atrName === 'Events'){
             for (let eventObj of value){
                 eventObj.act === "add" || !eventObj.act ? el.addEventListener(eventObj.evnt, eventObj.evntFunc) : el.removeEventListener(eventObj.evnt, eventObj.evntFunc)
-                // eventObj.act === "add" || !eventObj.act ? el.addEventListener(eventObj.evnt, eval(eventObj.evntFunc)) : el.removeEventListener(eventObj.evnt, eval(eventObj.evntFunc))
             }
             continue
         }
@@ -26,15 +22,11 @@ function loop(el, atrs, ignoreAtr){
         else if (typeof value == 'object' && value.nodeName !== '#document-fragment'){
 
             for (let [secondAtrName, secondValue] of Object.entries(value)){
-                // console.log('secondAtrName', secondAtrName);
-                // console.log('secondValue:', secondValue);
-                // console.log('el:', el);
                 el[`${atrName}`][`${secondAtrName}`] = secondValue;
             };
 
         }
         else if (value.nodeName === '#document-fragment'){
-            // console.log("#document-fragment:", value)
             el.appendChild(value)
         }
         else {
@@ -64,26 +56,41 @@ export function insertTo(parent, content, flag='end', ignoreAtr=[]){
     for (let obj of content) {
 
         console.log('obj:', obj)
-        const typeOf = obj.typeName
         let el;
 
         if (typeof obj === 'string' || typeof obj === 'number'){
             el = document.createDocumentFragment()
             el.textContent += obj
-        } else {
-            el = document.createElement(`${typeOf}`);
+        } 
+        else {
             if (Object.keys(obj).length !== 0) {
+                if (obj.passedObj){
+                    el = obj.passedObj
+                    delete obj.passedObj
+                }
+                else if (obj.typeName){
+                    el = document.createElement(obj.typeName);
+                }
+                else if (!obj.typeName){
+                    el = document.createDocumentFragment()
+                }
+
+                console.log('el: ', el)
                 loop(el, obj, ignoreAtr);
-            }; 
+            };
         }
         
         //filling parent:
-        if (flag == "end"){
-            parent.appendChild(el);
+        if (parent) {
+            console.log('YYYYYY: ', parent)
+            if (flag == "end"){
+                parent.appendChild(el);
+            }
+            else if(flag == "start"){
+                parent.prepend(el);
+            };
         }
-        else if(flag == "start"){
-            parent.prepend(el);
-        };
+       
         //----------------------------------------------------
         
     };
@@ -115,6 +122,23 @@ export function make(nodename){
 
 export function removeEvent(qry, evnt, handler){
     document.querySelector(qry).removeEventListener(evnt, handler)
+}
+
+export function update(data){
+
+    for (let obj of data) {
+
+        let objToChange = select(obj.query)
+        delete obj.query
+        obj.passedObj = objToChange
+        
+        if (obj.textContent) {
+            refresh(objToChange, [{textContent: obj.textContent}])
+            delete obj.textContent
+        }
+
+        insertTo(false, [obj])
+    }
 }
 
 

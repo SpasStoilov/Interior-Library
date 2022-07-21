@@ -3,6 +3,7 @@ import * as Event from "./events.js"
 import * as glbStyles from "./globalStyles.js"
 
 
+
 export let navOptAndLogo = [
     {
         typeName: "img",
@@ -76,10 +77,11 @@ export let navbar = [
 export let paragraph = [
     {
         typeName: "p",
+        className: "changeMe",
         textContent: [
             'Interior',
             {
-                type: 'span',
+                typeName: 'span',
                 textContent: " DEMO",
                 style: {
                     fontWeight: "bold"
@@ -136,6 +138,26 @@ export let form = [
         },
         textContent: [
             ...logInInputAndButton
+        ]
+    }
+]
+
+export let dataToChange = [
+    {
+        query: ".changeMe",
+        style: {
+            backgroundColor: "gray"
+        },
+        textContent: [
+            'Change',
+            {
+                typeName: 'span',
+                textContent: " Done",
+                style: {
+                    fontWeight: "bold",
+                    color: 'red'
+                }
+            }
         ]
     }
 ]

@@ -33,4 +33,5 @@ Interior.insertTo('body', form)
 let ignoreAtr = ['style']
 Interior.insertTo('body', form, 'end', ignoreAtr)
 
+Interior.update(Library.dataToChange)
 //---------------------------------------------------------------
